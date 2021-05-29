@@ -1,0 +1,12 @@
+LIBRARY
+EXPORTS
+information
+Initialization
+Plug_in_exit
+Event_datahandle_change
+Event_accept
+Event_playuser_message
+Event_get_message_manage
+Event_will_message_manage
+Event_command_modify
+Event_Console
