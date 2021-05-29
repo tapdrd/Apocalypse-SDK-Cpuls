@@ -1,5 +1,7 @@
 # Build and Release Folders
 .vs
+Release
+Debug
 bin-debug/
 bin-release/
 [Oo]bj/
