@@ -5,3 +5,4 @@
 #define CJSON_PUBLIC(type) __declspec(dllexport) type CJSON_STDCALL
 #define CJSON_PUBLIC(type) __declspec(dllimport) type CJSON_STDCALL
 #define CJSON_PUBLIC(type) __attribute__((visibility("default"))) type
+#define WINAPI
