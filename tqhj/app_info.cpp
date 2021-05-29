@@ -11,6 +11,8 @@ using namespace std;
 
 // 插件初始化信息
 LPCSTR information() {
+	/*初始化Api,请勿删除*/
+	CreateApi();
 	plugin_info info{};
 
 	/*APPID, 需与编译后文件名一致, 拓展文件名应为 {appid}.AP.dll*/
@@ -34,8 +36,6 @@ LPCSTR information() {
 	/*是否有控制台*/
 	info.windows = false;
 
-	/*初始化Api,请勿删除*/
-	CreateApi();
 	return strToHex(get_plugin_info(info));
 };
 
