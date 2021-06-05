@@ -87,14 +87,6 @@ int Event_accept(
 	s2.append(s1);
 	tq_SendMsg(type, user, group, s2.c_str(), from_type, from_obj);
 	*/
-	tq_SendLog(msg);
-	LPCSTR ret = "hgksjafhs";
-	if (tq_SystemCheck(0, type, user, group, ret) == true)
-		tq_SendMsg(type, user, group, from_type, from_obj, "1");
-	else
-		tq_SendMsg(type, user, group, from_type, from_obj, "2");
-
-	tq_SendMsg(type, user, group, from_type, from_obj, ret);
 	// 请返回常量 message_Ignore 或 message_Intercept
 	return message_Intercept;
 }
