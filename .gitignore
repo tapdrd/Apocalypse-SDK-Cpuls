@@ -1,21 +1,4 @@
-# Build and Release Folders
-.vs/
-Release/
-Debug/
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+#忽略目录
 
-# Other files and folders
-.settings/
-
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
-
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+/.git/
+/.vs/
