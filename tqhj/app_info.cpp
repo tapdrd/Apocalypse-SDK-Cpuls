@@ -80,7 +80,6 @@ int Event_accept(
 	LPCSTR from_obj	//来源对象
 )
 {
-
 	/*
 	这是一个示例, 会发送 复读+用户内容
 	string s1(msg), s2("复读");
