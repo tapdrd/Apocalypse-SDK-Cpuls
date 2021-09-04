@@ -32,15 +32,15 @@ LPCSTR get_plugin_info(plugin_info info)
 	cJSON_AddStringToObject(json, "联系方式1", info.contact);
 	cJSON_AddStringToObject(json, "联系方式2", info.group);
 
-	cJSON_AddNumberToObject(json, "窗口", info.windows == true ? 1 : 0);
+	cJSON_AddBoolToObject(json, "窗口", info.windows);
 
 	cJSON_AddStringToObject(json, "介绍", info.show);
 	cJSON_AddStringToObject(json, "更新日志", info.update_log);
 
 
-	cJSON_AddNumberToObject(json, "SDK", 7);
-	cJSON_AddStringToObject(json, "模块", "3.0.0");
-	cJSON_AddNumberToObject(json, "模块号", 300000);
+	cJSON_AddNumberToObject(json, "SDK", 8);
+	cJSON_AddStringToObject(json, "模块", "3.1.0");
+	cJSON_AddNumberToObject(json, "模块号", 301000);
 
 	char* ch = cJSON_Print(json);
 	cJSON_Delete(json);

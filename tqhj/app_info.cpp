@@ -36,7 +36,7 @@ LPCSTR information() {
 	/*是否有控制台*/
 	info.windows = false;
 
-	return strToHex(get_plugin_info(info));
+	return get_plugin_info(info);
 };
 
 // 插件启动事件
@@ -75,17 +75,17 @@ int Event_accept(
 	int type,		//1.私聊 2.群聊
 	LPCSTR user,	//来源用户
 	LPCSTR group,	//群组/讨论组
-	LPCSTR msg,		//消息内容
-	int from_type,	//来源类型
-	LPCSTR from_obj	//来源对象
+	LPCSTR msg		//消息内容
 )
 {
+	
 	/*
-	这是一个示例, 会发送 复读+用户内容
+	//这是一个示例, 会发送 复读+用户内容
 	string s1(msg), s2("复读");
 	s2.append(s1);
-	tq_SendMsg(type, user, group, s2.c_str(), from_type, from_obj);
+	tq_SendMsg(type, user, group, s2.c_str());
 	*/
+
 	// 请返回常量 message_Ignore 或 message_Intercept
 	return message_Intercept;
 }
@@ -112,9 +112,7 @@ LPCSTR Event_get_message_manage(
 	int type,		//1.私聊 2.群聊
 	LPCSTR user,	//来源用户
 	LPCSTR group,	//群组/讨论组
-	LPCSTR msg,		//消息内容
-	int from_type,	//来源类型
-	LPCSTR from_obj	//来源对象
+	LPCSTR msg		//消息内容
 )
 {
 	//此事件可对插件接收到的消息进行处理
@@ -131,9 +129,7 @@ LPCSTR Event_will_message_manage(
 	int type,		//1.私聊 2.群聊
 	LPCSTR user,	//来源用户
 	LPCSTR group,	//群组/讨论组
-	LPCSTR msg,		//消息内容
-	int from_type,	//来源类型
-	LPCSTR from_obj	//来源对象
+	LPCSTR msg		//消息内容
 )
 {
 	//此事件可对插件发送到的消息进行处理

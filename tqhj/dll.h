@@ -6,7 +6,7 @@ typedef LPCSTR(WINAPI* Api_StrToHex)(LPCSTR str);
 typedef LPCSTR(WINAPI* Api_HexToStr)(LPCSTR Hex);
 typedef LPCSTR(WINAPI* Api_RobotType)(int type);
 typedef int(WINAPI* Api_DataHandle)(int type);
-typedef int(WINAPI* Api_SendMsg)(int type, LPCSTR user, LPCSTR group, LPCSTR msg, int from_type, LPCSTR from_obj, LPCSTR APPID);
+typedef int(WINAPI* Api_SendMsg)(int type, LPCSTR user, LPCSTR group, LPCSTR msg,LPCSTR APPID);
 typedef int(WINAPI* Api_SendAllMsg)(int type, LPCSTR group, LPCSTR msg);
 typedef LPCSTR(WINAPI* Api_SystemCheck)(int type, int sub_type, LPCSTR user, LPCSTR group);
 typedef LPCSTR(WINAPI* Api_SendEvent)(int type, LPCSTR log);

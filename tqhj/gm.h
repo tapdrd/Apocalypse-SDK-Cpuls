@@ -4,6 +4,10 @@
 */
 #include "dll.h"
 #include "cJSON.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 
 /// <summary>
 /// 获取机器人名称
@@ -33,11 +37,11 @@ int tq_GetDBHandle(int type)
 /// <param name="from_type">来源类型</param>
 /// <param name="from_obj">来源对象</param>
 /// <returns>是否发送成功</returns>
-bool tq_SendMsg(int type, LPCSTR user, LPCSTR group, int from_type, LPCSTR from_obj, LPCSTR msg)
+bool tq_SendMsg(int type, LPCSTR user, LPCSTR group,LPCSTR msg)
 {
 	if (APPID == NULL || APPID == "")return false;
 	if (msg == NULL || msg == "")return false;
-	return DllApi_SendMsg(type, user, group, msg, from_type, from_obj, APPID) != 0;
+	return DllApi_SendMsg(type, user, group, msg, APPID) != 0;
 }
 /// <summary>
 /// 发送全服消息
