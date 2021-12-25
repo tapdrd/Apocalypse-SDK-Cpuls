@@ -19,6 +19,23 @@ LPCSTR tq_GetRobotName(int type)
 	return DllApi_RobotType(type);
 }
 /// <summary>
+/// 发送Web消息
+/// </summary>
+/// <param name="handle">用户句柄</param>
+/// <param name="sendJson">要发送的Json, 此Json 会包含在 info这个key内发送至网页端</param>
+/// <returns></returns>
+bool tq_SendWebMsg(int handle, LPCSTR sendJson)
+{
+	cJSON* json = cJSON_CreateObject();
+	cJSON_AddNumberToObject(json, "handle", handle);
+	cJSON_AddStringToObject(json, "pluginID", APPID);
+	cJSON_AddStringToObject(json, "json", sendJson);
+	char* ret = cJSON_Print(json);
+	cJSON_Delete(json);
+
+	return DllApi_SendEvent(10000, ret)!=0;
+}
+/// <summary>
 /// 获取数据库句柄
 /// </summary>
 /// <param name="type">可使用常量get_DBHandle_xx</param>

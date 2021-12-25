@@ -6,10 +6,10 @@
 
 #### 开发环境
 
-	IDE: visual studio 2019  16.10
+	IDE: visual studio 2022  17.0.4
 	Windows SDK版本 10.0
-	平台工具集	visual studio 2019(v142)
-	C++语言标准	ISO C++ 17标准
+	平台工具集	visual studio 2022(v143)
+	C++语言标准	ISO C++ 20标准
 	C语言标准	ISO C17 (2018)标准
 
 

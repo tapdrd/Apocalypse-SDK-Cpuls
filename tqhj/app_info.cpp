@@ -9,12 +9,14 @@
 #include <string>
 using namespace std;
 
-// 插件初始化信息
+/// <summary>
+/// 插件信息
+/// </summary>
+/// <returns></returns>
 LPCSTR information() {
 	/*初始化Api,请勿删除*/
 	CreateApi();
 	plugin_info info{};
-
 	/*APPID, 需与编译后文件名一致, 拓展文件名应为 {appid}.AP.dll*/
 	info.appid = "cn.tapdrd.demo";
 	/*插件名称*/
@@ -39,62 +41,77 @@ LPCSTR information() {
 	return get_plugin_info(info);
 };
 
-// 插件启动事件
-int Initialization(
-	LPCSTR file_exp,	//[拓展目录]可将ini文件放在此处
-	LPCSTR file_plugin,	//[插件目录]机器人的插件目录
-	LPCSTR qq_robot,	//[机器人QQ]可用作授权验证
-	int db_handle,		//[数据库句柄]SQLite3数据库
-	int type_robot,		//[机器人类型]用 tq_GetRobotName()可获取机器人名称
-	int plugin_charge	//[插件类型]0.免费版 1.收费版
-) {
+/// <summary>
+/// 插件启动
+/// </summary>
+/// <param name="expandPath">[拓展目录]可将ini文件放在此处</param>
+/// <param name="pluginPath">[插件目录]机器人的插件目录</param>
+/// <param name="robotID">[机器人QQ]可用作授权验证</param>
+/// <param name="dbHandle">[数据库句柄]SQLite3数据库</param>
+/// <param name="robotType">[机器人类型]用 机器人类型()可获取机器人名称</param>
+/// <param name="pluginType">[插件类型]0.免费版 1.收费版</param>
+/// <returns></returns>
+int Initialization(LPCSTR expandPath, LPCSTR pluginPath, LPCSTR robotID, int dbHandle, int robotType, int pluginType) {
 	return 0;
 }
 
-// 插件关闭事件
+/// <summary>
+/// 插件关闭
+/// </summary>
+/// <returns></returns>
 int Plug_in_exit()
 {
 	/*此处可做插件退出处理
 	例如时钟/线程/内存等资源释放*/
-
 	return 0;
 }
 
-// 数据库句柄改变消息
-int Event_datahandle_change(
-	int plugin_handle,	//[拓展]拓展数据库句柄
-	int data_handle,	//[玩家]玩家数据库句柄
-	int config_handle	//[系统]系统数据库句柄
-)
-{
+/// <summary>
+/// 数据库句柄改变
+/// </summary>
+/// <param name="plugin_handle">[拓展]拓展数据库句柄</param>
+/// <param name="data_handle">[玩家]玩家数据库句柄</param>
+/// <param name="config_handle">[系统]系统数据库句柄</param>
+/// <returns></returns>
+int Event_datahandle_change(int pluginHandle,int dataHandle,int configHandle){
 	return 0;
 }
 
-// 消息事件
-int Event_accept(
-	int type,		//1.私聊 2.群聊
-	LPCSTR user,	//来源用户
-	LPCSTR group,	//群组/讨论组
-	LPCSTR msg		//消息内容
-)
-{
-	
+/// <summary>
+/// 消息事件
+/// </summary>
+/// <param name="type">1.私聊 2.群聊</param>
+/// <param name="user">来源用户</param>
+/// <param name="group">群组/讨论组</param>
+/// <param name="msg">消息内容</param>
+/// <returns></returns>
+int Event_accept(int type,LPCSTR user,LPCSTR group,LPCSTR msg){
 	/*
 	//这是一个示例, 会发送 复读+用户内容
 	string s1(msg), s2("复读");
 	s2.append(s1);
 	tq_SendMsg(type, user, group, s2.c_str());
 	*/
-
 	// 请返回常量 message_Ignore 或 message_Intercept
 	return message_Intercept;
 }
-
-// 玩家消息事件
-int Event_playuser_message(
-	int type,		//类型
-	LPCSTR msg		//此处将传入JSON信息
-)
+/// <summary>
+/// 网页请求消息
+/// 可参考文档:https://d.tapdrd.cn/web/norm/
+/// </summary>
+/// <param name="handle">用户句柄</param>
+/// <param name="info"><用户提交的消息/param>
+/// <returns></returns>
+int Event_Web_message(int handle, LPCSTR info) {
+	return message_Ignore;
+}
+/// <summary>
+/// 玩家消息
+/// </summary>
+/// <param name="type">类型</param>
+/// <param name="msg">消息内容,格式为Json</param>
+/// <returns></returns>
+int Event_playuser_message(int type,LPCSTR msg)
 {
 	/*
 	注意：如果玩家删号了,请在拓展数据中同步删除玩家数据,以免出现问题
@@ -107,34 +124,32 @@ int Event_playuser_message(
 	return message_Ignore;
 }
 
-// 消息接收事件 [可改变玩家发送的消息内容]
-LPCSTR Event_get_message_manage(
-	int type,		//1.私聊 2.群聊
-	LPCSTR user,	//来源用户
-	LPCSTR group,	//群组/讨论组
-	LPCSTR msg		//消息内容
-)
-{
-	//此事件可对插件接收到的消息进行处理
-
-
+/// <summary>
+/// 消息接收事件
+///		用于替换接收到的文本
+/// </summary>
+/// <param name="type">1.私聊 2.群聊</param>
+/// <param name="user">来源用户</param>
+/// <param name="group">群组/讨论组</param>
+/// <param name="msg">消息内容</param>
+/// <returns></returns>
+LPCSTR Event_get_message_manage(int type, LPCSTR user, LPCSTR group, LPCSTR msg) {
 	/*
 	返回空文本也将视为未处理发送消息
 	如果要取消此消息发送,可返回使用常量 message_Ban
 	*/
 	return msg;
 }
-// 消息发送事件 [可改变机器人发送的消息内容]
-LPCSTR Event_will_message_manage(
-	int type,		//1.私聊 2.群聊
-	LPCSTR user,	//来源用户
-	LPCSTR group,	//群组/讨论组
-	LPCSTR msg		//消息内容
-)
-{
-	//此事件可对插件发送到的消息进行处理
-
-
+/// <summary>
+/// 消息发送事件
+///		用于替换接即将发送的文本
+/// </summary>
+/// <param name="type">1.私聊 2.群聊</param>
+/// <param name="user">来源用户</param>
+/// <param name="group">群组/讨论组</param>
+/// <param name="msg">消息内容</param>
+/// <returns></returns>
+LPCSTR Event_will_message_manage(int type, LPCSTR user, LPCSTR group, LPCSTR msg) {
 	/*
 	返回空文本也将视为未处理发送消息
 	如果要取消此消息发送,可返回使用常量 message_Ban
@@ -142,8 +157,14 @@ LPCSTR Event_will_message_manage(
 	return msg;
 }
 
-// 游戏自定义命令修改事件
-int Event_command_modify()
+/// <summary>
+/// 游戏自定义命令修改
+/// </summary>
+/// <param name="id">使用常量 系统命令_</param>
+/// <param name="old_command">修改前的命令</param>
+/// <param name="new_command">修改后的命令</param>
+/// <returns></returns>
+int Event_command_modify(int id,LPCSTR old_command,LPCSTR new_command)
 {
 	//当用户修改了自定义命令后,会接收到消息
 
@@ -151,7 +172,10 @@ int Event_command_modify()
 	return message_Ignore;
 }
 
-// 插件控制台
+/// <summary>
+/// 控制台窗口
+/// </summary>
+/// <returns></returns>
 int Event_Console()
 {
 	MessageBox(NULL, TEXT("你好这是控制台事件"), TEXT("信息"), NULL);
